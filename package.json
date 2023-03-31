@@ -1,0 +1,27 @@
+{
+  "name": "vue3-vite-templat",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.27.1",
+    "dayjs": "^1.11.3",
+    "pinia": "^2.0.13",
+    "qs": "^6.11.1",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "sass": "^1.60.0",
+    "unplugin-auto-import": "^0.7.1",
+    "unplugin-icons": "^0.14.7",
+    "unplugin-vue-components": "^0.19.3",
+    "vite": "^4.2.0"
+  }
+}
