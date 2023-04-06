@@ -7,7 +7,7 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.body {
+.app {
   margin: 0px;
   height: 0px;
 }

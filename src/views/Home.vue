@@ -1,13 +1,40 @@
 <template>
-  <div>主页</div>
+  <div class="home">
+    <div class="flex">
+      <c-button
+        lable="bio"
+        class="w-100px h-40px mr-20px"
+        @click="onPage"></c-button>
+      <c-button
+        lable="dome"
+        class="w-100px h-40px mr-20px"
+        @click="onPage"></c-button>
+      <c-button
+        lable="mapbox"
+        class="w-100px h-40px"
+        @click="onPage"></c-button>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-onMounted(() => {
-  console.log(123)
+import CButton from '@/components/CButton.vue'
 
-  console.log(callApi)
+defineComponent({
+  CButton,
 })
+
+function onPage() {
+  console.log(123)
+}
+onMounted(() => {})
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.home {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+</style>

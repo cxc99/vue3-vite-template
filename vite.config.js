@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite' //自动导入依赖插件
 import { resolve } from 'path' // 主要用于alias文件路径别名
+import WindiCSS from 'vite-plugin-windicss'
+// import Components from 'unplugin-vue-components/vite'
 import vue from '@vitejs/plugin-vue'
 function pathResolve(dir) {
   return resolve(__dirname, '.', dir)
@@ -10,6 +12,8 @@ export default defineConfig({
   base: './',
   plugins: [
     vue(),
+    WindiCSS(),
+    // Components(),
     AutoImport({
       imports: [
         'vue',
