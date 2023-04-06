@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.27.1",
     "dayjs": "^1.11.3",
+    "echarts": "^5.4.2",
     "mapbox-gl": "^2.13.0",
     "pinia": "^2.0.13",
     "qs": "^6.11.1",
@@ -25,6 +26,8 @@
     "unplugin-vue-components": "^0.19.9",
     "vite": "^4.2.0",
     "vite-plugin-windicss": "^1.8.10",
+    "vue3-count-to": "^1.1.2",
+    "vue3-seamless-scroll": "^2.0.1",
     "windicss": "^3.5.6"
   }
 }

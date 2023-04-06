@@ -1,0 +1,161 @@
+{
+  "version": 8,
+  "metadata": {},
+  "glyphs": "./mapbox/glyphs/{fontstack}/{range}.pbf",
+  "sources": {
+    "osm": {
+      "type": "vector",
+      "tiles": []
+    },
+    "tdt-img": {
+      "type": "raster",
+      "tiles": [
+        "https://t3.tianditu.gov.cn/img_w/wmts?layer=img&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c",
+        "https://t4.tianditu.gov.cn/img_w/wmts?layer=img&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c",
+        "https://t5.tianditu.gov.cn/img_w/wmts?layer=img&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c",
+        "https://t6.tianditu.gov.cn/img_w/wmts?layer=img&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c",
+        "https://t7.tianditu.gov.cn/img_w/wmts?layer=img&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c"
+      ],
+      "tileSize": 256,
+      "minzoom": 6,
+      "maxzoom": 20
+    },
+    "tdt-vec": {
+      "type": "raster",
+      "tiles": [
+        "https://t2.tianditu.gov.cn/vec_w/wmts?layer=vec&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c"
+      ],
+      "tileSize": 256,
+      "minzoom": 6,
+      "maxzoom": 20
+    },
+    "tdt-ter": {
+      "type": "raster",
+      "tiles": [
+        "https://t2.tianditu.gov.cn/ter_w/wmts?layer=ter&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c"
+      ],
+      "tileSize": 256,
+      "minzoom": 6,
+      "maxzoom": 20
+    },
+    "tdt-zj": {
+      "type": "raster",
+      "tiles": [
+        "https://ditu.zjzwfw.gov.cn/services/wmts/imgmap/default/oss?layer=imgmap&style=default&tilematrixset=default028mm&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fjpgpng&TileMatrix={z}&TileCol={x}&TileRow={y}&token=724ee193-e517-4935-8054-62337927fbac"
+      ],
+      "tileSize": 256,
+      "minzoom": 6,
+      "maxzoom": 20
+    },
+    "tdt-cia": {
+      "type": "raster",
+      "tiles": [
+        "https://t3.tianditu.gov.cn/cia_w/wmts?layer=cia&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c"
+      ],
+      "tileSize": 256,
+      "minzoom": 6,
+      "maxzoom": 20
+    },
+    "tdt-cva": {
+      "type": "raster",
+      "tiles": [
+        "https://t3.tianditu.gov.cn/cva_w/wmts?layer=cva&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c"
+      ],
+      "tileSize": 256,
+      "minzoom": 6,
+      "maxzoom": 20
+    },
+    "tdt-cta": {
+      "type": "raster",
+      "tiles": [
+        "https://t3.tianditu.gov.cn/cta_w/wmts?layer=cta&style=default&tilematrixset=w&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}&tk=d5cbd0c27896bb8f535dc57ecef2718c"
+      ],
+      "tileSize": 256,
+      "minzoom": 6,
+      "maxzoom": 20
+    }
+  },
+  "layers": [
+    {
+      "id": "tdt-vec",
+      "type": "raster",
+      "source": "tdt-vec",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "layout": {
+        "visibility": "none"
+      }
+    },
+    {
+      "id": "tdt-img",
+      "type": "raster",
+      "source": "tdt-img",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "layout": {
+        "visibility": "visible"
+      }
+    },
+    {
+      "id": "tdt-ter",
+      "type": "raster",
+      "source": "tdt-ter",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "layout": {
+        "visibility": "none"
+      }
+    },
+    {
+      "id": "tdt-cva",
+      "type": "raster",
+      "source": "tdt-cva",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "layout": {
+        "visibility": "none"
+      }
+    },
+    {
+      "id": "tdt-cia",
+      "type": "raster",
+      "source": "tdt-cia",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "layout": {
+        "visibility": "none"
+      }
+    },
+    {
+      "id": "tdt-cta",
+      "type": "raster",
+      "source": "tdt-cta",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "layout": {
+        "visibility": "none"
+      }
+    },
+    {
+      "id": "tdt-zj",
+      "type": "raster",
+      "source": "tdt-zj",
+      "minzoom": 6,
+      "maxzoom": 20,
+      "layout": {
+        "visibility": "none"
+      }
+    },
+    {
+      "id": "JN1",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "y3",
+      "minzoom": 14,
+      "filter": ["any", ["in", "d0", "22mbVMl", "2blm1aZ"]],
+      "layout": {
+        "visibility": "none"
+      }
+    }
+  ]
+}

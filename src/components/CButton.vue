@@ -23,6 +23,7 @@ const props = withDefaults(defineProps<Props>(), { lable: '按钮' })
   display: flex;
   align-items: center;
   justify-content: center;
+
   /* font-size: 25px; */
   text-transform: uppercase;
   cursor: pointer;

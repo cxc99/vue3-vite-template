@@ -5,6 +5,10 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component: () => import('../views/Home.vue'),
   },
+  {
+    path: '/dataScreen',
+    component: () => import('../views/dataScreen/index.vue'),
+  },
 ]
 
 export const router = createRouter({

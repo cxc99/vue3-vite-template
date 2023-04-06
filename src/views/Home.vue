@@ -2,7 +2,7 @@
   <div class="home">
     <div class="flex">
       <c-button
-        lable="bio"
+        lable="个人简介"
         class="w-100px h-40px mr-20px"
         @click="onPage"></c-button>
       <c-button
@@ -10,9 +10,13 @@
         class="w-100px h-40px mr-20px"
         @click="onPage"></c-button>
       <c-button
-        lable="mapbox"
+        lable="mapbox-gl"
+        class="w-110px h-40px mr-20px"
+        @click="onPage('/')"></c-button>
+      <c-button
+        lable="大屏"
         class="w-100px h-40px"
-        @click="onPage"></c-button>
+        @click="onPage('/dataScreen')"></c-button>
     </div>
   </div>
 </template>
@@ -23,9 +27,10 @@ import CButton from '@/components/CButton.vue'
 defineComponent({
   CButton,
 })
+const router = useRouter()
 
-function onPage() {
-  console.log(123)
+function onPage(url = '/') {
+  router.push(url)
 }
 onMounted(() => {})
 </script>
