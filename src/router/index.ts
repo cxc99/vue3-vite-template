@@ -1,4 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { system } from './system'
+import { mapbox } from './mapbox'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,6 +11,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/dataScreen',
     component: () => import('../views/dataScreen/index.vue'),
   },
+  ...system,
+  ...mapbox,
 ]
 
 export const router = createRouter({

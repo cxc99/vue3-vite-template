@@ -6,13 +6,13 @@
         class="w-100px h-40px mr-20px"
         @click="onPage"></c-button>
       <c-button
-        lable="dome"
+        lable="后台"
         class="w-100px h-40px mr-20px"
-        @click="onPage"></c-button>
+        @click="onPage('/loign')"></c-button>
       <c-button
         lable="mapbox-gl"
         class="w-110px h-40px mr-20px"
-        @click="onPage('/')"></c-button>
+        @click="onPage('/mapbox')"></c-button>
       <c-button
         lable="大屏"
         class="w-100px h-40px"
@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
 import CButton from '@/components/CButton.vue'
 
 defineComponent({
@@ -32,7 +33,39 @@ const router = useRouter()
 function onPage(url = '/') {
   router.push(url)
 }
-onMounted(() => {})
+
+async function textApi() {
+  try {
+    const data = await callApi.get('/search/users2', {})
+    console.log(data)
+  } catch (error) {
+    console.log(error, '报错拉')
+  }
+}
+
+async function getUserInfo() {
+  try {
+    const data = await callApi.get('/userInfo', { ce: '123123' })
+    console.log(data)
+  } catch (error) {
+    console.log(error, '报错拉')
+  }
+}
+// 调用本地数据库的 接口
+async function reFindsheet() {
+  try {
+    const data = await callApi.get('/sheet')
+    console.log(data)
+  } catch (error) {
+    console.log(error, '报错拉')
+  }
+}
+// userInfo
+onMounted(() => {
+  // textApi()
+  // getUserInfo()
+  // reFindsheet()
+})
 </script>
 
 <style lang="scss" scoped>

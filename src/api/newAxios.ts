@@ -18,19 +18,20 @@ const instance = axios.create({
   withCredentials: true,
 })
 
-instance.defaults.baseURL = `${window.location.origin}/api/pc/`
 instance.defaults.timeout = 6 * 1000 //超时毫秒 60s
 instance.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded; charset=UTF-8'
 instance.defaults.withCredentials = true
-
+// multipart/form-data
 // axios请求拦截
 instance.interceptors.request.use(
   (config: any) => {
     // 在发送请求之前做些什么:
     // 如果需要在header头中传token，使用下边这段代码
-    if (localStorage.getItem('token')) {
-      config.headers['token'] = localStorage.getItem('token')
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers['Authorization'] = token
+      config.headers['token'] = token
     }
 
     return config
@@ -120,15 +121,15 @@ export function get(url: string, params = {}) {
  */
 export function post(url: string, params: Record<string, any> = {}) {
   // 如果需要在请求的参数中传token，使用下边这段代码
-  let token = localStorage.getItem('token') || ''
-  // console.log(token, 'tokentoken')
-  if (params.__proto__.constructor.name == 'Object') {
-    token && (params.token = token)
-    // params = qs.stringify(params)
-    // console.log(params)
-  } else if (params.__proto__.constructor.name == 'FormData') {
-    token && params.append('token', token)
-  }
+  // let token = localStorage.getItem('token') || ''
+
+  // if (params.__proto__.constructor.name == 'Object') {
+  //   token && (params.token = token)
+  // params = qs.stringify(params)
+  // console.log(params)
+  // } else if (params.__proto__.constructor.name == 'FormData') {
+  //   token && params.append('token', token)
+  // }
 
   return new Promise((resolve, reject) => {
     instance
