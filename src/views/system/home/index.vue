@@ -3,12 +3,12 @@
     <el-container>
       <el-header>
         <div class="home__title">
-          <div>ccc后台</div>
+          <div>自定义后台</div>
 
           <div class="home__personage">
             <el-avatar
               :size="40"
-              src="https://weixt-export.weixiaotong.com.cn/6d29449b0f9c58f8ec7141af941ca7ac.jpg" />
+              src="https://show.cardwinner.com/hz/hdzs/ICBC_HZ_SBCJ/assets/egg.033c1c10.png" />
 
             <el-icon :size="15" class="ml-10px"><CaretBottom /></el-icon>
           </div>
@@ -72,6 +72,7 @@ watch(
   &__title {
     width: 100%;
     height: 100%;
+    // height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -80,7 +81,7 @@ watch(
   }
 
   &__main {
-    height: calc(100vh - 140px);
+    height: calc(100vh - 90px);
     background: rgba(225, 0, 255, 0.049);
   }
 
@@ -91,7 +92,7 @@ watch(
   }
   :deep(.el-header) {
     padding: 0px;
-    height: 100px;
+    // height: 100px;
   }
   :deep(.el-main) {
     padding: 10px;

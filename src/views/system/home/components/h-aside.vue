@@ -21,13 +21,18 @@
                   :key="groupIndex"
                   :route="group"
                   :index="group.path">
-                  {{ group.title }}
+                  <template #title>
+                    <el-icon><icon-menu /></el-icon>
+                    {{ group.title }}
+                  </template>
 
                   <!-- <el-menu-item
                     v-for="(targe, targeIndex) in group.children"
                     :key="targeIndex"
                     :route="targe"
-                    :index="targe.path"></el-menu-item> -->
+                    :index="targe.path">
+                    {{ targe.title }}
+                  </el-menu-item> -->
                 </el-menu-item>
               </el-sub-menu>
 
@@ -52,7 +57,8 @@ import {
 } from '@element-plus/icons-vue'
 import { menu } from '../mock/menu'
 
-const Menu = reactive(menu)
+const Menu = reactive(menu) as any
+console.log(Menu, 'Menu')
 
 const route = useRoute()
 

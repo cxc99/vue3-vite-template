@@ -11,11 +11,11 @@
         </div>
         <Map></Map>
         <div class="h-1/7 pb-1px">
-          <!-- <tankage>
+          <tankage>
             <div class="home__pedesta h-full py-20px px-50px">
               <pedestal-button v-for="i of 4" :key="i"></pedestal-button>
             </div>
-          </tankage> -->
+          </tankage>
         </div>
       </div>
       <div class="w-2/7">
@@ -30,7 +30,7 @@ import screenTitle from './components/screenTitle.vue'
 import leftScreen from './components/leftScreen.vue'
 import rightScreen from './components/rightScreen.vue'
 import appearance from './components/appearance.vue'
-// import pedestalButton from './components/pedestalButton.vue'
+import pedestalButton from './components/pedestalButton.vue'
 import Map from './components/map.vue'
 defineComponent({
   screenTitle,
@@ -38,7 +38,7 @@ defineComponent({
   leftScreen,
   appearance,
   rightScreen,
-  // pedestalButton,
+  pedestalButton,
 })
 
 onMounted(() => {

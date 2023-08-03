@@ -17,10 +17,14 @@ export const menu = [
             path: '/personnel',
             meta: { title: '成员管理' },
           },
+          {
+            path: '/system/home/management',
+            meta: { title: '成员管理' },
+          },
         ],
       },
       // { path: '/personnel', title: '成员管理' },
     ],
-    meta: { title: '权限管理' },
+    meta: { title: '权限管理2' },
   },
 ]

@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { system } from './system'
 import { mapbox } from './mapbox'
+import { three } from './three'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,6 +14,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   ...system,
   ...mapbox,
+  ...three,
 ]
 
 export const router = createRouter({

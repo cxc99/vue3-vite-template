@@ -23,9 +23,12 @@ const form = reactive({
 })
 
 const onSubmit = async () => {
+
   try {
     const data = await callApi.post('/login', form)
     const { token, code } = data as { token: string; code: number }
+    console.log(code);
+    
     if (code === 200) {
       localStorage.setItem('token', token)
       router.push('./system/home')

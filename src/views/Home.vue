@@ -15,8 +15,12 @@
         @click="onPage('/mapbox')"></c-button>
       <c-button
         lable="大屏"
-        class="w-100px h-40px"
+        class="w-100px h-40px mr-20px"
         @click="onPage('/dataScreen')"></c-button>
+      <c-button
+        lable="three"
+        class="w-100px h-40px"
+        @click="onPage('/three')"></c-button>
     </div>
   </div>
 </template>

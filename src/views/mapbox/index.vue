@@ -27,6 +27,8 @@ function mapInit() {
     zoom: 8,
     maxZoom: 17,
     style: mapJson,
+    pitch: 45,
+    bearing: 90,
   })
 
   mapBox.value = Map
@@ -48,7 +50,7 @@ function mapInit() {
       },
     })
 
-    // setLine()
+    setLine()
   })
 }
 

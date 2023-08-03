@@ -6,8 +6,9 @@
 import * as echarts from 'echarts'
 import { optionMap } from '../eharthDome/option'
 import map from '../eharthDome/map.json'
+import china from '@/assets/map/china.json'
 
-let mapData: any = map
+let mapData: any = china
 
 onMounted(() => {
   const myChartMap = echarts.init(document.getElementById('map')!)

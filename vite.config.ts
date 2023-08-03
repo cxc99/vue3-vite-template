@@ -7,7 +7,7 @@ import Components from 'unplugin-vue-components/vite'
 
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
-function pathResolve(dir) {
+function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir)
 }
 // https://vitejs.dev/config/
@@ -41,7 +41,7 @@ export default defineConfig({
     open: '/',
     cors: true,
     port: 8090,
-    hot: true,
+
     proxy: {
       '/api/': {
         target: 'http://localhost:5000',
