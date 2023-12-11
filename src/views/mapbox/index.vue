@@ -316,8 +316,8 @@ function setLine() {
 
 onMounted(() => {
   mapInit()
-  // threeInit()
-  // setLine()
+  threeInit()
+  setLine()
 })
 </script>
 

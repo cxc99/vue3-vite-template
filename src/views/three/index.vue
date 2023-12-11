@@ -28,8 +28,16 @@ function initCube() {
 
   dom.appendChild(renderer.domElement)
 
+  const bg = new URL('@/assets/logo.png', import.meta.url).href
+  const texture = new THREE.TextureLoader().load(bg, (texture: any) => {})
+
   const geometry = new THREE.BoxGeometry(1, 1, 1)
-  const material = new THREE.MeshBasicMaterial({ color: 'pink' })
+  const material = new THREE.MeshBasicMaterial({
+    color: 'pink',
+    map: texture,
+    side: THREE.FrontSide,
+  })
+
   const cube = new THREE.Mesh(geometry, material) as any
   scene.add(cube)
 
@@ -79,9 +87,9 @@ function initLine() {
 
   scene.add(line)
 
-  const loader = new GLTFLoader()
-  const Path = new URL('./config/dome.glft', import.meta.url)
-  console.log(Path)
+  // const loader = new GLTFLoader()
+  // const Path = new URL('./config/dome.glft', import.meta.url)
+  // console.log(Path)
 
   // loader.setPath(Path)
   // loader.load('/config/dome.glft', function (gltf) {
