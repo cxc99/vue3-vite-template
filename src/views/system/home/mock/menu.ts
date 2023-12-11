@@ -14,10 +14,12 @@ export const menu = [
         title: '权限管理',
         children: [
           {
+            title: '成员管理',
             path: '/personnel',
             meta: { title: '成员管理' },
           },
           {
+            title: '成员管理',
             path: '/system/home/management',
             meta: { title: '成员管理' },
           },
@@ -25,6 +27,6 @@ export const menu = [
       },
       // { path: '/personnel', title: '成员管理' },
     ],
-    meta: { title: '权限管理2' },
+    meta: { title: '权限管理' },
   },
 ]

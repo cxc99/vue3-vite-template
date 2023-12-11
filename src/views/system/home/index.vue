@@ -6,16 +6,14 @@
           <div>自定义后台</div>
 
           <div class="home__personage">
-            <el-avatar
-              :size="40"
-              src="https://show.cardwinner.com/hz/hdzs/ICBC_HZ_SBCJ/assets/egg.033c1c10.png" />
+            <el-avatar :size="40" :src="imgUrl" />
 
             <el-icon :size="15" class="ml-10px"><CaretBottom /></el-icon>
           </div>
         </div>
       </el-header>
       <el-container>
-        <h-aside></h-aside>
+        <HAside></HAside>
         <el-main>
           <div class="home__main">
             <div class="p-20px">
@@ -37,15 +35,13 @@
 </template>
 
 <script setup lang="ts">
-import HAside from './components/h-aside.vue'
-
-defineComponent({
-  HAside,
-})
+import HAside from './components/HAaside.vue'
 
 // 面包屑导航功能
 const route = useRoute()
 const breadcrumbList: Record<string, any> = ref([])
+
+const imgUrl = new URL(`@/assets/img/tx1.jpg`, import.meta.url).href
 
 const caleBreadcrumb = () => {
   breadcrumbList.value = route.matched.filter(

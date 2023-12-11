@@ -13,10 +13,8 @@
     "dayjs": "^1.11.3",
     "echarts": "^5.4.2",
     "element-plus": "^2.3.3",
-    "mapbox-gl": "^2.13.0",
     "pinia": "^2.0.13",
     "qs": "^6.11.1",
-    "three": "^0.151.3",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
@@ -30,8 +28,6 @@
     "unplugin-vue-components": "^0.19.9",
     "vite": "^4.2.0",
     "vite-plugin-windicss": "^1.8.10",
-    "vue3-count-to": "^1.1.2",
-    "vue3-seamless-scroll": "^2.0.1",
     "windicss": "^3.5.6"
   }
 }

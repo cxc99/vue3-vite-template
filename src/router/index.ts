@@ -1,20 +1,13 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { system } from './system'
-import { mapbox } from './mapbox'
-import { three } from './three'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: () => import('../views/Home.vue'),
   },
-  {
-    path: '/dataScreen',
-    component: () => import('../views/dataScreen/index.vue'),
-  },
+
   ...system,
-  ...mapbox,
-  ...three,
 ]
 
 export const router = createRouter({

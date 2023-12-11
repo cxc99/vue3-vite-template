@@ -21,7 +21,7 @@ export default defineConfig({
         'vue',
         'vue-router',
         {
-          '@/api/newAxios': ['callApi'],
+          '@/api/callApi': ['callApi'],
         },
       ],
       dts: 'src/types/auto-imports.d.ts', // 依赖表
