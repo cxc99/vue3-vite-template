@@ -26,6 +26,23 @@ export const system = [
         ],
         component: () => import('../views/system/management/index.vue'),
       },
+      {
+        path: '/article',
+        meta: { title: '文章列表' },
+        component: () => import('../views/system/article/index.vue'),
+        children: [
+          {
+            path: 'table',
+            meta: { title: '文章列表' },
+            component: () => import('../views/system/article/articleTable.vue'),
+          },
+          {
+            path: 'issue',
+            meta: { title: '文章发布' },
+            component: () => import('../views/system/article/issue.vue'),
+          },
+        ],
+      },
     ],
   },
 ]

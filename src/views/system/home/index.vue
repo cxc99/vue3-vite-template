@@ -3,7 +3,7 @@
     <el-container>
       <el-header>
         <div class="home__title">
-          <div>自定义后台</div>
+          <div>后台</div>
 
           <div class="home__personage">
             <el-avatar :size="40" :src="imgUrl" />

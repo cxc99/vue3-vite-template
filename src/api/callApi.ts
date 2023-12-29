@@ -2,14 +2,18 @@
 // import router from '../router/index.js' //引入路由对象
 
 // axios
-
+interface Request {
+  code: string | number
+  data: any
+  msg: string
+}
 import axios from 'axios'
 // import qs from 'qs'
 
 const baseURL =
   process.env.NODE_ENV === 'development'
     ? `${window.location.origin}/api/`
-    : 'https://shaoxin.star7.cn:9090/' // 正式地址
+    : 'http://47.97.154.67/api/' // 正式地址
 
 const instance = axios.create({
   baseURL,
@@ -93,7 +97,6 @@ export function get(url: string, params = {}) {
       })
       .then((res: Record<string, any>) => {
         if (res.data.code == -2000) {
-          console.log(res.data.message)
           // localStorage.clear()
           const router = useRouter()
           setTimeout(() => {
@@ -103,7 +106,7 @@ export function get(url: string, params = {}) {
           }, 1000)
           return
         } else if (res.data.code !== 200) {
-          console.log(res.message)
+          console.log(res.msg)
         }
         resolve(res.data)
       })
@@ -131,7 +134,7 @@ export function post(url: string, params: Record<string, any> = {}) {
   //   token && params.append('token', token)
   // }
 
-  return new Promise((resolve, reject) => {
+  return new Promise<Promise<Request>>((resolve, reject) => {
     instance
       .post(url, params)
       .then(res => {

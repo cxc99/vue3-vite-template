@@ -20,13 +20,21 @@ export const menu = [
           },
           {
             title: '成员管理',
-            path: '/system/home/management',
+            path: '/system/home',
             meta: { title: '成员管理' },
           },
         ],
       },
-      // { path: '/personnel', title: '成员管理' },
     ],
     meta: { title: '权限管理' },
+  },
+
+  {
+    title: '文章',
+    path: '/article',
+    children: [
+      { path: '/article/table', title: '文章列表' },
+      { path: '/article/issue', title: '文章发布' },
+    ],
   },
 ]

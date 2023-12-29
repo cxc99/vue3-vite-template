@@ -1,7 +1,7 @@
 <template>
-  <div>124</div>
+  <div>列表</div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style></style>
+<style scoped></style>
