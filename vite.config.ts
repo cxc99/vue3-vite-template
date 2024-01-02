@@ -43,6 +43,7 @@ export default defineConfig({
     port: 8090,
 
     proxy: {
+      // http://47.97.154.67
       '/api/': {
         target: 'http://127.0.0.1:3000/api/',
         changeOrigin: true,
