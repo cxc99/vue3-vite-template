@@ -6,6 +6,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component: () => import('../views/Home.vue'),
   },
+  {
+    path: '/loign',
+    name: 'Login',
+    component: () => import('../views/system/login.vue'),
+    meta: { title: '登入' },
+  },
 
   ...system,
 ]
@@ -25,12 +31,16 @@ router.beforeEach((to, from, next) => {
     window.document.title = to.meta.title
   }
 
-  if (to.meta.verification) {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      // router.push({ name: 'login' })
-    }
+  const whileList = ['/', '/loign']
+  if (whileList.includes(to.path)) return next()
+
+  const token = localStorage.getItem('token')
+
+  if (!token) {
+    router.push({ name: 'Login' })
+    return next()
   }
+
   // 返回 false 以取消导航
   next()
 })

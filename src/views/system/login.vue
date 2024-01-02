@@ -71,11 +71,14 @@
 
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
+import { user } from '@/pinia/modules/user'
 const router = useRouter()
 const form = reactive({
   userName: '1090113499',
   password: '123456',
 })
+
+const useUser = user()
 
 const onSubmit = async () => {
   try {
@@ -87,6 +90,25 @@ const onSubmit = async () => {
         type: 'success',
         message: '登入成功',
       })
+
+      const infoData = {
+        userId: data.userId,
+        token: data.token,
+        nickName: data.nickName,
+        userName: data.userName,
+        userType: data.userType,
+        remark: data.remark,
+        sex: data.sex,
+        status: data.status,
+        delFlag: data.delFlag,
+        deptId: data.deptId,
+        email: data.email,
+        loginDate: data.loginDate,
+        avatar: data.avatar,
+        phonenumber: data.phonenumber,
+      }
+
+      useUser.SET_USER(infoData)
       setTimeout(() => {
         router.push('./system/home')
       }, 1500)

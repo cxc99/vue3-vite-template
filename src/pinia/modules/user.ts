@@ -1,50 +1,50 @@
 import { defineStore } from 'pinia'
 
 interface User {
-  avatar: ''
-  createBy: ''
-  createTime: null
-  delFlag: '0'
-  deptId: '103'
-  email: ''
-  loginDate: null
-  loginIp: '127.0.0.1'
-  nickName: '程'
-  password: '123456'
-  phonenumber: '13175120575'
-  remark: null
-  sex: '0'
-  status: '0'
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMDAiLCJ1c2VybmFtZSI6IjEwOTAxMTM0OTkiLCJwaG9uZW51bWJlciI6IjEzMTc1MTIwNTc1IiwiaWF0IjoxNzAzOTQxNjcyfQ.6bYzKHXaONTSjpqZWrDUHxppFzCU8TXF8_Dzr4xJUO4'
-  updateBy: ''
-  updateTime: null
-  userId: '100'
-  userName: '1090113499'
-  userType: '00'
+  avatar: string
+  delFlag: string
+  deptId: string
+  email: string
+  loginDate: null | string
+  nickName: string
+  phonenumber: string
+  remark: null | string
+  sex: string
+  status: string
+  token: string
+  userId: string
+  userName: string
+  userType: string
 }
 
 export const user = defineStore('user', {
   state: (): User => ({
     avatar: '',
-    createBy: '',
-    createTime: null,
-    delFlag: '0',
-    deptId: '103',
+    delFlag: '',
+    deptId: '',
     email: '',
     loginDate: null,
-    loginIp: '127.0.0.1',
-    nickName: '程',
-    password: '123456',
-    phonenumber: '13175120575',
+    nickName: '',
+    phonenumber: '',
     remark: null,
-    sex: '0',
-    status: '0',
-    token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMDAiLCJ1c2VybmFtZSI6IjEwOTAxMTM0OTkiLCJwaG9uZW51bWJlciI6IjEzMTc1MTIwNTc1IiwiaWF0IjoxNzAzOTQxNjcyfQ.6bYzKHXaONTSjpqZWrDUHxppFzCU8TXF8_Dzr4xJUO4',
-    updateBy: '',
-    updateTime: null,
-    userId: '100',
-    userName: '1090113499',
-    userType: '00',
+    sex: '',
+    status: '',
+    token: '',
+    userId: '',
+    userName: '',
+    userType: '',
   }),
+
+  actions: {
+    SET_USER(user: User) {
+      for (const key in user) {
+        if (Object.prototype.hasOwnProperty.call(user, key)) {
+          const targe = key as keyof User
+          this[targe] = user[targe] as string
+        }
+      }
+    },
+  },
+
+  persist: true,
 })

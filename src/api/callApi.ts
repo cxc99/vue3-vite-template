@@ -90,7 +90,7 @@ export function get(url: string, params = {}) {
   // 	token && (params.append("token", token));
   // }
 
-  return new Promise((resolve, reject) => {
+  return new Promise<Promise<Request>>((resolve, reject) => {
     instance
       .get(url, {
         params: params,

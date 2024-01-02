@@ -1,0 +1,23 @@
+::-webkit-scrollbar {
+    height: 1px;
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #87ceeb;
+    background-image: -webkit-linear-gradient(45deg,
+            hsla(0, 0%, 100%, 0.2) 25%,
+            transparent 0,
+            transparent 50%,
+            hsla(0, 0%, 100%, 0.2) 0,
+            hsla(0, 0%, 100%, 0.2) 75%,
+            transparent 0,
+            transparent);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ededed;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px #0003;
+}

@@ -1,10 +1,5 @@
 export const system = [
   {
-    path: '/loign',
-    component: () => import('../views/system/login.vue'),
-    meta: { title: '登入' },
-  },
-  {
     path: '/system/home',
     component: () => import('../views/system/home/index.vue'),
     meta: { title: '首页' },
