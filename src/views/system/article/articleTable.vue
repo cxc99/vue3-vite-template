@@ -20,7 +20,7 @@
         <el-table-column label="操作" align="center">
           <template #default="{ row }">
             <div class="text-[#1a7eea]">
-              <span class="cursor-pointer">查看</span>
+              <span class="cursor-pointer" @click="onPage(row.id)">查看</span>
             </div>
           </template>
         </el-table-column>
@@ -34,11 +34,20 @@ import TableTmp from '@/components/TableTmp/index.vue'
 import { example } from './articleTable'
 
 import GroupInout from '@/components/GroupInout/index.vue'
-
+const router = useRouter()
 const table = ref(null) as any
 
 const onRefresh = () => {
   table.value.init()
+}
+
+const onPage = (id: any) => {
+  router.push({
+    path: '/article/issue',
+    query: {
+      id,
+    },
+  })
 }
 
 onActivated(() => {

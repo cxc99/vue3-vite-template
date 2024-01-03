@@ -37,14 +37,18 @@ import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { user } from '@/pinia/modules/user'
 
+type InsertFnType = (url: string, alt?: string, href?: string) => void
+
+const route = useRoute()
 const useUser = user()
 const editorRef = shallowRef()
 const mode = ref('default')
 
 const form = ref({
   title: '',
-  content: '<p>hello</p>',
+  content: '',
   userName: useUser.nickName,
+  id: null as string | null,
 })
 // useUser.nickName
 const toolbarConfig = {}
@@ -52,15 +56,23 @@ const editorConfig = {
   placeholder: '请输入内容...',
   MENU_CONF: {
     uploadImage: {
-      async customUpload(file: File, insertFn: any) {
-        console.log(file, insertFn, 'ccc')
+      async customUpload(file: File, insertFn: InsertFnType) {
+        try {
+          const formData = new FormData()
+          formData.append('file', file)
+          const { data, code } = await callApi.post(
+            '/blogsArticle/upload',
+            formData,
+          )
 
-        // TS 语法
-        // async customUpload(file, insertFn) {                   // JS 语法
-        // file 即选中的文件
-        // 自己实现上传，并得到图片 url alt href
-        // 最后插入图片
-        // insertFn(url, alt, href)
+          if (code == 200) {
+            ElMessage({ type: 'success', message: '上传成功' })
+
+            insertFn(data.url)
+          }
+        } catch (error) {
+          console.log(error)
+        }
       },
     },
   },
@@ -72,20 +84,29 @@ const handleCreated = (editor: any) => {
 
 const onSubmit = async () => {
   try {
-    const { data, code } = await callApi.post(
-      '/blogsArticle/create/article',
-      form.value,
-    )
+    const url = form.value.id
+      ? '/blogsArticle/update/article'
+      : '/blogsArticle/create/article'
+    const { data, code } = await callApi.post(url, form.value)
     code == 200 && ElMessage({ type: 'success', message: '发布成功' })
-    console.log(data, code)
   } catch (error) {}
 }
 
-onMounted(() => {
-  // setTimeout(() => {
-  //   form.value.content = '<p>模拟 Ajax 异步设置内容</p>'
-  // }, 1500)
-})
+const reFindDetails = async () => {
+  try {
+    const { data } = await callApi.get('/blogsArticle/info', {
+      id: route.query.id,
+    })
+
+    form.value = data
+
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+onMounted(() => {})
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
@@ -97,7 +118,16 @@ onBeforeUnmount(() => {
 onActivated(() => {
   // 调用时机为首次挂载
   // 以及每次从缓存中被重新插入时
-  // console.log(124142)
+  form.value.id = String(route.query.id) || null
+
+  route.query.id
+    ? reFindDetails()
+    : (form.value = {
+        title: '',
+        content: '',
+        userName: useUser.nickName,
+        id: null,
+      })
 })
 
 onDeactivated(() => {
