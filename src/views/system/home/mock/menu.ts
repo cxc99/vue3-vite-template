@@ -12,18 +12,22 @@ export const menu = [
       {
         path: '/management',
         title: '权限管理',
-        children: [
-          {
-            title: '成员管理',
-            path: '/personnel',
-            meta: { title: '成员管理' },
-          },
-          {
-            title: '成员管理',
-            path: '/system/home',
-            meta: { title: '成员管理' },
-          },
-        ],
+        // children: [
+        //   {
+        //     title: '成员管理',
+        //     path: '/personnel',
+        //     meta: { title: '成员管理' },
+        //   },
+        //   {
+        //     title: '成员管理',
+        //     path: '/system/home',
+        //     meta: { title: '成员管理' },
+        //   },
+        // ],
+      },
+      {
+        path: '/permissionRoutes',
+        title: '路由管理',
       },
     ],
     meta: { title: '权限管理' },

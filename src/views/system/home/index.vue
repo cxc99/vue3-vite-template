@@ -3,7 +3,7 @@
     <el-container>
       <el-header>
         <div class="home__title">
-          <div>后台</div>
+          <div>浅夏的星球后台</div>
 
           <div class="home__personage">
             <el-dropdown>
@@ -13,16 +13,10 @@
               </div>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item>Action 1</el-dropdown-item>
-                  <el-dropdown-item>Action 2</el-dropdown-item>
-                  <el-dropdown-item>Action 3</el-dropdown-item>
-                  <el-dropdown-item>Action 4</el-dropdown-item>
-                  <el-dropdown-item>Action 5</el-dropdown-item>
+                  <el-dropdown-item @click="logout">退出</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-
-            <!-- <el-icon :size="15" class="ml-10px"><CaretBottom /></el-icon> -->
           </div>
         </div>
       </el-header>
@@ -62,10 +56,17 @@ import HAside from './components/HAaside.vue'
 import { user } from '@/pinia/modules/user'
 // 面包屑导航功能
 const route = useRoute()
+
+const router = useRouter()
 const useUser = user()
 const breadcrumbList: Record<string, any> = ref([])
 
 const imgUrl = new URL(`@/assets/img/tx1.jpg`, import.meta.url).href
+
+const logout = () => {
+  localStorage.clear()
+  router.push('/login')
+}
 
 const caleBreadcrumb = () => {
   breadcrumbList.value = route.matched.filter(

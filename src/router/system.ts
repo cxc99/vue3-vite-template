@@ -22,6 +22,12 @@ export const system = [
         component: () => import('../views/system/management/index.vue'),
       },
       {
+        path: '/permissionRoutes',
+        meta: { title: '路由管理' },
+        component: () =>
+          import('../views/system/management/permissionRoutes.vue'),
+      },
+      {
         path: '/article',
         meta: { title: '文章列表' },
         component: () => import('../views/system/article/index.vue'),

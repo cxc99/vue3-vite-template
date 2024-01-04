@@ -8,6 +8,7 @@ interface Request {
   msg: string
 }
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
 // import qs from 'qs'
 
 const baseURL =
@@ -70,6 +71,12 @@ instance.interceptors.response.use(
         default:
           console.log(error.response.data.msg)
           Promise.reject(error.response)
+
+          ElMessage({
+            message: error.response.data.msg || '服务器错误',
+            type: 'error',
+            duration: 2 * 1000,
+          })
       }
       return Promise.reject(error.response)
     }

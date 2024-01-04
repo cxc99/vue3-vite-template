@@ -1,18 +1,5 @@
 <template>
   <div class="login">
-    <!-- <el-form :model="form" label-width="120px">
-      <el-form-item label="用户名">
-        <el-input v-model="form.username" />
-      </el-form-item>
-      <el-form-item label="密码">
-        <el-input type="password" v-model="form.password" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">登入</el-button>
-        <el-button>注册</el-button>
-      </el-form-item>
-    </el-form> -->
-
     <section>
       <!-- 背景颜色 -->
       <div class="color"></div>
