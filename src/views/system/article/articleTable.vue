@@ -43,7 +43,7 @@ const onRefresh = () => {
 
 const onPage = (id: any) => {
   router.push({
-    path: '/article/issue',
+    path: '/issue',
     query: {
       id,
     },
