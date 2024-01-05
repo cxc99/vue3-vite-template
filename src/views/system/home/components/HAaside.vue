@@ -16,7 +16,7 @@
                   <span>{{ item.title }}</span>
                 </template>
 
-                <div v-for="(group, groupIndex) in item.children">
+                <div v-for="group in item.children">
                   <el-sub-menu
                     v-if="group.children?.length"
                     :index="group.path">
@@ -31,7 +31,10 @@
                   </el-sub-menu>
 
                   <div v-else>
-                    <el-menu-item :index="group.path">
+                    <el-menu-item
+                      v-if="!group.meta.hideMenu"
+                      :route="group.path"
+                      :index="group.path">
                       <template #title>
                         {{ group.title }}
                       </template>
@@ -65,7 +68,7 @@ import { routeStore } from '@/pinia/modules/route'
 
 const routeStores = routeStore()
 
-const Menu = reactive(routeStores.getRoutes) as any
+const Menu = reactive(routeStores.getMenu) as any
 
 const route = useRoute()
 

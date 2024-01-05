@@ -5,7 +5,7 @@ import {
   createWebHistory,
 } from 'vue-router'
 import { system } from './system'
-
+import { permissionTree } from '@/utils/threeRoutes'
 export const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -39,10 +39,26 @@ export const router = createRouter({
   routes, // `routes: routes` 的缩写
 })
 
+const createdRoute = () => {
+  const storeRoute = localStorage.getItem('storeRoute') || ''
+
+  if (storeRoute) {
+    const list = JSON.parse(storeRoute).routes
+
+    const treeRouter = permissionTree(list, '0')
+
+    treeRouter.forEach((item: any) => {
+      router.addRoute('System', item)
+    })
+  }
+}
+
+createdRoute()
+
 router.beforeEach((to, from, next) => {
   // ...
   console.log('路由前置守护')
-  console.log(router.getRoutes())
+  // console.log(router.getMenu())
 
   if (to.meta.title) {
     window.document.title = to.meta.title
