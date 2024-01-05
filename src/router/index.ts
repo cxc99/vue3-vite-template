@@ -6,7 +6,7 @@ import {
 } from 'vue-router'
 import { system } from './system'
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: () => import('../views/Home.vue'),
@@ -17,6 +17,18 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/system/login.vue'),
     meta: { title: '登入' },
   },
+  {
+    path: '/system/home',
+    name: 'System',
+    component: () => import('../views/system/home/index.vue'),
+    meta: { title: '首页' },
+  },
+  // {
+  //   path: '/layout',
+  //   name: 'Layout',
+  //   component: () => import('../views/Layout/index.vue'),
+  //   meta: { title: 'Layout' },
+  // },
 
   ...system,
 ]

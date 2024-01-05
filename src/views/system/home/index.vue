@@ -9,7 +9,7 @@
             <el-dropdown>
               <div class="flex items-center">
                 <el-avatar :size="40" :src="imgUrl" />
-                <span class="px-5px">{{ useUser.nickName }}</span>
+                <span class="px-5px">{{ storeUser.nickName }}</span>
               </div>
               <template #dropdown>
                 <el-dropdown-menu>
@@ -54,11 +54,13 @@
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import HAside from './components/HAaside.vue'
 import { user } from '@/pinia/modules/user'
+
 // 面包屑导航功能
 const route = useRoute()
 
 const router = useRouter()
-const useUser = user()
+const storeUser = user()
+
 const breadcrumbList: Record<string, any> = ref([])
 
 const imgUrl = new URL(`@/assets/img/tx1.jpg`, import.meta.url).href
@@ -67,12 +69,13 @@ const logout = () => {
   localStorage.clear()
   router.push('/login')
 }
-
+/*
+ * 面包屑导航
+ */
 const caleBreadcrumb = () => {
   breadcrumbList.value = route.matched.filter(
     item => item.meta && item.meta.title,
   )
-  // console.log(breadcrumbList, 23323)
 }
 
 watch(

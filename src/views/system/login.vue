@@ -59,13 +59,16 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
 import { user } from '@/pinia/modules/user'
+import { routeStore } from '@/pinia/modules/route'
 const router = useRouter()
 const form = reactive({
   userName: '1090113499',
   password: '123456',
 })
 
-const useUser = user()
+const storeUser = user()
+
+const routeStores = routeStore()
 
 const onSubmit = async () => {
   try {
@@ -95,10 +98,13 @@ const onSubmit = async () => {
         phonenumber: data.phonenumber,
       }
 
-      useUser.SET_USER(infoData)
+      storeUser.SET_USER(infoData)
+
+      routeStores.SET_THREE_ROUTER(await initMenu(infoData.deptId))
+      routeStores.INIT_ROUER()
       setTimeout(() => {
         router.push('./system/home')
-      }, 1500)
+      }, 2000)
     } else {
       ElMessage({
         type: 'error',
@@ -107,6 +113,18 @@ const onSubmit = async () => {
     }
   } catch (error) {
     console.log(error)
+  }
+}
+
+const initMenu = async (deptId: string) => {
+  try {
+    const { data } = await callApi.post('/userRole/routes', {
+      deptId,
+    })
+    return data || []
+  } catch (error) {
+    console.log(error)
+    return []
   }
 }
 </script>

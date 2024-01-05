@@ -26,15 +26,15 @@
                     <el-menu-item
                       v-for="(targe, targeIndex) in group.children"
                       :key="targeIndex"
-                      :route="group.path + targe.path"
-                      :index="group.path + targe.path">
-                      {{ targe.title }}
-                    </el-menu-item>
+                      :route="targe.path"
+                      :index="targe.path"></el-menu-item>
                   </el-sub-menu>
 
                   <div v-else>
                     <el-menu-item :index="group.path">
-                      <template #title>{{ group.title }}</template>
+                      <template #title>
+                        {{ group.title }}
+                      </template>
                     </el-menu-item>
                   </div>
                 </div>
@@ -61,7 +61,11 @@ import {
 } from '@element-plus/icons-vue'
 import { menu } from '../mock/menu'
 
-const Menu = reactive(menu) as any
+import { routeStore } from '@/pinia/modules/route'
+
+const routeStores = routeStore()
+
+const Menu = reactive(routeStores.getRoutes) as any
 
 const route = useRoute()
 

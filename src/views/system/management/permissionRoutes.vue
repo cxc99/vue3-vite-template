@@ -283,7 +283,7 @@ function resetFrom() {
   }
 }
 
-const created = (item: {
+const createdRoute = (item: {
   affix?: '' | undefined
   component?: '' | undefined
   hideMenu?: '' | undefined
@@ -331,7 +331,7 @@ const created = (item: {
 // 一维数组转化为树结构
 const permissionTree = (arr: any[], pid: any) => {
   return arr.reduce((res, current) => {
-    const newCurrent = created(current)
+    const newCurrent = createdRoute(current)
     if (newCurrent['parentId'] == pid) {
       newCurrent.children = permissionTree(arr, newCurrent['id'])
       return res.concat(newCurrent)
