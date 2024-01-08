@@ -16,7 +16,7 @@
       </div>
 
       <div class="w-full">
-        <el-table :data="addRoutes" border show-overflow>
+        <el-table :data="storeRoute.getMenu" border show-overflow>
           <el-table-column label="应用" width="180" align="center">
             <template #default="{ row }">
               <el-checkbox-group v-model="info.rules">
@@ -27,7 +27,7 @@
             </template>
           </el-table-column>
           <el-table-column label="功能" align="center">
-            <!-- <template #default="{ row }">
+            <template #default="{ row }">
               <el-checkbox-group v-model="info.rules">
                 <el-checkbox
                   v-for="(group, index) in row.children"
@@ -36,7 +36,7 @@
                   {{ group.title }}
                 </el-checkbox>
               </el-checkbox-group>
-            </template> -->
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -45,11 +45,15 @@
 </template>
 
 <script setup lang="ts">
+import { routeStore } from '@/pinia/modules/route'
+
 interface Tree {
   id: string
   label: string
   children?: Tree[]
 }
+
+const storeRoute = routeStore()
 
 const props = {
   value: 'id',
@@ -75,6 +79,7 @@ const initRole = async () => {
     threeData.value = data
     nextTick(() => {
       treeRef.value.setCurrentKey(data[0].id)
+
       info.value = data[0]
     })
   } catch (error) {
@@ -94,7 +99,7 @@ const initRouter = async () => {
 
 onMounted(() => {
   initRole()
-  initRouter()
+  // initRouter()
 })
 </script>
 
