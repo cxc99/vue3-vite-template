@@ -1,144 +1,153 @@
 <template>
-  <el-form :model="form" label-width="120px" :rules="rules" ref="formRef">
-    <slot name="top"></slot>
-    <el-row>
-      <el-col v-for="item in formItem" :key="item.key" :span="item.span || 24">
-        <el-form-item
-          :label="item.label + ':'"
-          :prop="item.key"
-          label-width="150">
-          <div v-if="item.type === 'input'" class="w-full flex">
-            <el-input v-model="form[item.key]" :disabled="item.disabled" />
-            <span class="text-center">
-              {{ item.unit || '' }}
-            </span>
-          </div>
-          <div v-if="item.type === 'number'" class="w-full flex">
-            <el-input
-              type="number"
-              v-model.number="form[item.key]"
-              :class="{ 'w-1/2': item.child && form[item.key] }" />
-            <span v-if="item.unit" class="w-50px text-center">
-              {{ item.unit || '' }}
-            </span>
-
-            <!-- item.child && form[item.key]  判断上级是否存在值 并且是否有子集child  -->
-            <el-form-item
-              v-if="item.child && form[item.key]"
-              :label="item.child.label + ':'"
-              :prop="item.child.key"
-              class="w-full">
-              <el-input
-                :type="item.child.type"
-                v-model="form[item.child.key]" />
-              <span class="w-50px text-center">
-                {{ item.child.unit || '' }}
+  <div>
+    <el-form :model="form" label-width="120px" :rules="rules" ref="formRef">
+      <slot name="top"></slot>
+      <el-row>
+        <el-col
+          v-for="item in formItem"
+          :key="item.key"
+          :span="item.span || 24">
+          <el-form-item
+            :label="item.label + ':'"
+            :prop="item.key"
+            label-width="150">
+            <div v-if="item.type === 'input'" class="w-full flex">
+              <el-input v-model="form[item.key]" :disabled="item.disabled" />
+              <span class="text-center">
+                {{ item.unit || '' }}
               </span>
-            </el-form-item>
-          </div>
-          <div v-if="item.type === 'select'">
-            <el-select
-              v-model="form[item.key]"
-              :placeholder="item.placeholder || ''"
-              :disabled="item.disabled">
-              <el-option
+            </div>
+            <div v-if="item.type === 'number'" class="w-full flex">
+              <el-input
+                type="number"
+                v-model.number="form[item.key]"
+                :class="{ 'w-1/2': item.child && form[item.key] }" />
+              <span v-if="item.unit" class="w-50px text-center">
+                {{ item.unit || '' }}
+              </span>
+
+              <!-- item.child && form[item.key]  判断上级是否存在值 并且是否有子集child  -->
+              <el-form-item
+                v-if="item.child && form[item.key]"
+                :label="item.child.label + ':'"
+                :prop="item.child.key"
+                class="w-full">
+                <el-input
+                  :type="item.child.type"
+                  v-model="form[item.child.key]" />
+                <span class="w-50px text-center">
+                  {{ item.child.unit || '' }}
+                </span>
+              </el-form-item>
+            </div>
+            <div v-if="item.type === 'select'">
+              <el-select
+                v-model="form[item.key]"
+                :placeholder="item.placeholder || ''"
+                :disabled="item.disabled">
+                <el-option
+                  v-for="group in item.options"
+                  :key="group.type"
+                  :label="group.name"
+                  :value="group.type" />
+              </el-select>
+            </div>
+
+            <el-radio-group
+              v-if="item.type === 'radio'"
+              v-model="form[item.key]">
+              <el-radio
                 v-for="group in item.options"
                 :key="group.type"
-                :label="group.name"
-                :value="group.type" />
-            </el-select>
-          </div>
+                :label="group.type">
+                {{ group.name }}
+              </el-radio>
+            </el-radio-group>
 
-          <el-radio-group v-if="item.type === 'radio'" v-model="form[item.key]">
-            <el-radio
-              v-for="group in item.options"
-              :key="group.type"
-              :label="group.type">
-              {{ group.name }}
-            </el-radio>
-          </el-radio-group>
-
-          <el-date-picker
-            v-if="item.type === 'date'"
-            v-model="form[item.key]"
-            type="datetime"
-            placeholder="请选择时间"
-            value-format="YYYY-MM-DD HH:mm:ss"
-            format="YYYY-MM-DD HH:mm:ss"
-            :disabledDate="(time:any) => disabledDateFun(time, item.key)" />
-          <!-- @change="status => onHandelSwith(+status, item.itemCode)"  -->
-
-          <div v-if="item.type === 'switch'">
-            <el-switch
+            <el-date-picker
+              v-if="item.type === 'date'"
               v-model="form[item.key]"
-              :inactive-value="0"
-              :active-value="1" />
+              type="datetime"
+              placeholder="请选择时间"
+              value-format="YYYY-MM-DD HH:mm:ss"
+              format="YYYY-MM-DD HH:mm:ss"
+              :disabledDate="(time:any) => disabledDateFun(time, item.key)" />
+            <!-- @change="status => onHandelSwith(+status, item.itemCode)"  -->
 
-            <span v-if="item.note" class="text-blue-400 text-12px pl-12px">
-              {{ item.note }}
-            </span>
-          </div>
+            <div v-if="item.type === 'switch'">
+              <el-switch
+                v-model="form[item.key]"
+                :inactive-value="0"
+                :active-value="1" />
 
-          <div v-if="item.type === 'uploade'">
-            <div class="uploade">
-              <el-upload
-                v-loading.fullscreen.lock="loading"
-                element-loading-text="图片上传中..."
-                v-model:file-list="form[item.key]"
-                :http-request="(file: any) => requset(file, form[item.key])"
-                action="#"
-                :onChange="handleOnChange"
-                :show-file-list="false">
-                <img
-                  v-if="form[item.key]?.length"
-                  :src="form[item.key][0].url"
-                  class="avatar" />
-                <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
-              </el-upload>
+              <span v-if="item.note" class="text-blue-400 text-12px pl-12px">
+                {{ item.note }}
+              </span>
             </div>
-            <div v-if="item.note">{{ item.note }}</div>
-          </div>
 
-          <div v-if="item.type === 'icon'">
-            <div>
-              <el-popover
-                placement="bottom"
-                trigger="click"
-                width="300"
-                v-model:visible="visible">
-                <template #reference>
-                  <div class="flex items-center">
-                    <el-input
-                      v-if="!form[item.key]"
-                      v-model="form[item.key]"
-                      :disabled="item.disabled" />
-                    <el-icon v-else style="font-size: 20px">
-                      <Component :is="form[item.key]"></Component>
+            <div v-if="item.type === 'uploade'">
+              <div class="uploade">
+                <el-upload
+                  v-loading.fullscreen.lock="loading"
+                  element-loading-text="图片上传中..."
+                  v-model:file-list="form[item.key]"
+                  :http-request="(file: any) => requset(file, form[item.key])"
+                  action="#"
+                  list-type="picture-card"
+                  :onChange="handleOnChange"
+                  :on-preview="handlePictureCardPreview"
+                  :on-remove="(file: any) => handleRemove(file, form[item.key])">
+                  <el-icon><Plus /></el-icon>
+                </el-upload>
+              </div>
+              <div v-if="item.note">{{ item.note }}</div>
+            </div>
+
+            <div v-if="item.type === 'icon'">
+              <div>
+                <el-popover
+                  placement="bottom"
+                  trigger="click"
+                  width="300"
+                  v-model:visible="visible">
+                  <template #reference>
+                    <div class="flex items-center">
+                      <el-input
+                        v-if="!form[item.key]"
+                        v-model="form[item.key]"
+                        :disabled="item.disabled" />
+                      <el-icon v-else style="font-size: 20px">
+                        <Component :is="form[item.key]"></Component>
+                      </el-icon>
+                    </div>
+                  </template>
+                  <div class="overflow-auto h-300px">
+                    <el-icon
+                      v-for="targe in ElementPlusIconsVue"
+                      :key="targe.name"
+                      style="font-size: 20px"
+                      @click="setIcon(targe, item.key)">
+                      <Component :is="targe"></Component>
                     </el-icon>
                   </div>
-                </template>
-                <div class="overflow-auto h-300px">
-                  <el-icon
-                    v-for="targe in ElementPlusIconsVue"
-                    :key="targe.name"
-                    style="font-size: 20px"
-                    @click="setIcon(targe, item.key)">
-                    <Component :is="targe"></Component>
-                  </el-icon>
-                </div>
-              </el-popover>
+                </el-popover>
+              </div>
             </div>
-          </div>
-        </el-form-item>
-      </el-col>
-    </el-row>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-    <slot name="footer"></slot>
-  </el-form>
+      <slot name="footer"></slot>
+    </el-form>
+    <el-dialog v-model="dialogVisible">
+      <img w-full :src="dialogImageUrl" alt="Preview Image" />
+    </el-dialog>
+  </div>
 </template>
 
 <script setup lang="ts">
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import type { UploadProps, UploadUserFile } from 'element-plus'
 interface Formitem {
   label: string
   key: string
@@ -185,7 +194,8 @@ const props = withDefaults(defineProps<Prop>(), {
   rules: {},
 })
 const formRef = ref<any>(null)
-
+const dialogVisible = ref(false)
+const dialogImageUrl = ref('')
 function disabledDateFun(time: { getTime: () => number }, key: string) {
   // 还有其他配置 《后续增加》
   if (key === 'endTime') {
@@ -199,24 +209,29 @@ const onSubmit = async () => {
   })
 }
 
+const handlePictureCardPreview: UploadProps['onPreview'] = uploadFile => {
+  dialogImageUrl.value = uploadFile.url!
+  dialogVisible.value = true
+}
+
 async function requset(file: any, value: any) {
   const formData = new FormData()
   formData.append('file', file.file)
 
-  if (route.path == '/mallMmanagementSubPrize') {
-    formData.set('itemCode', String(route.query.activityCode))
-  } /* 奖品子路由的时候特殊添加处理**/
-
   try {
-    const { data } = await callApi.post('/qiniu/upload', formData)
-    value[0].url = data
+    const { data, code } = await callApi.post('/blogsArticle/upload', formData)
+    console.log(value)
+    if (code == 200) {
+      value.pop() // 删除本地数据
+      value.push(data) // 添加线上数据
+    }
   } catch (error) {
     console.log(error)
   }
 }
 
-const handleRemove = () => {
-  console.log(124)
+const handleRemove = (uploadFile: UploadProps, value: any) => {
+  console.log(uploadFile, value)
 }
 
 const handleOnChange = (file: { status: string }) => {
@@ -244,17 +259,17 @@ defineExpose({
 
 <style scoped lang="scss">
 .uploade {
-  border: 1px dashed var(--el-border-color);
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: var(--el-transition-duration-fast);
-  width: 125px;
-  height: 125px;
-  &:hover {
-    border-color: var(--el-color-primary);
-  }
+  // border: 1px dashed var(--el-border-color);
+  // border-radius: 6px;
+  // cursor: pointer;
+  // position: relative;
+  // overflow: hidden;
+  // transition: var(--el-transition-duration-fast);
+  // width: 125px;
+  // height: 125px;
+  // &:hover {
+  //   border-color: var(--el-color-primary);
+  // }
 }
 .el-icon.avatar-uploader-icon {
   font-size: 28px;

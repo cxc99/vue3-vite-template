@@ -1,33 +1,28 @@
 <template>
   <div>
-    <el-form
-      ref="ruleFormRef"
-      status-icon
-      label-width="120px"
-      class="demo-ruleForm">
-      <el-form-item label="标题" prop="title">
-        <div class="w-500px"><el-input v-model="form.title" /></div>
-      </el-form-item>
+    <FormConfig ref="formConfig" :formItem="formItem" :form="form">
+      <template #footer>
+        <el-form-item label="内容:" label-width="150">
+          <div style="border: 1px solid #ccc">
+            <Toolbar
+              style="border-bottom: 1px solid #ccc"
+              :editor="editorRef"
+              :defaultConfig="toolbarConfig"
+              :mode="mode" />
+            <Editor
+              style="height: 400px; overflow-y: hidden"
+              v-model="form.content"
+              :defaultConfig="editorConfig"
+              :mode="mode"
+              @onCreated="handleCreated" />
+          </div>
+        </el-form-item>
 
-      <el-form-item label="内容">
-        <div style="border: 1px solid #ccc">
-          <Toolbar
-            style="border-bottom: 1px solid #ccc"
-            :editor="editorRef"
-            :defaultConfig="toolbarConfig"
-            :mode="mode" />
-          <Editor
-            style="height: 500px; overflow-y: hidden"
-            v-model="form.content"
-            :defaultConfig="editorConfig"
-            :mode="mode"
-            @onCreated="handleCreated" />
-        </div>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">提交</el-button>
-      </el-form-item>
-    </el-form>
+        <el-form-item label-width="150">
+          <el-button type="primary" @click="onSubmit">提交</el-button>
+        </el-form-item>
+      </template>
+    </FormConfig>
   </div>
 </template>
 
@@ -36,6 +31,7 @@ import { ElMessage } from 'element-plus'
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { user } from '@/pinia/modules/user'
+import FormConfig from '@/components/FormConfig/index.vue'
 
 type InsertFnType = (url: string, alt?: string, href?: string) => void
 
@@ -44,12 +40,34 @@ const useUser = user()
 const editorRef = shallowRef()
 const mode = ref('default')
 
+const formConfig = ref(null)
+
 const form = ref({
   title: '',
   content: '',
   userName: useUser.nickName,
   id: null as string | null,
+  imgList: [] as any,
 })
+
+const formItem = ref([
+  {
+    label: '标题',
+    key: 'title',
+    type: 'input',
+    required: true,
+    placeholder: '',
+    span: 12,
+  },
+  {
+    label: '标题图片',
+    key: 'imgList',
+    type: 'uploade',
+    required: true,
+    placeholder: '',
+    span: 24,
+  },
+])
 // useUser.nickName
 const toolbarConfig = {}
 const editorConfig = {
@@ -87,7 +105,11 @@ const onSubmit = async () => {
     const url = form.value.id
       ? '/blogsArticle/update/article'
       : '/blogsArticle/create/article'
-    const { data, code } = await callApi.post(url, form.value)
+
+    const { data, code } = await callApi.post(url, {
+      ...form.value,
+      imgList: JSON.stringify(form.value.imgList),
+    })
     code == 200 && ElMessage({ type: 'success', message: '发布成功' })
   } catch (error) {}
 }
@@ -99,8 +121,6 @@ const reFindDetails = async () => {
     })
 
     form.value = data
-
-    console.log(data)
   } catch (error) {
     console.log(error)
   }
@@ -127,6 +147,7 @@ onActivated(() => {
         content: '',
         userName: useUser.nickName,
         id: null,
+        imgList: [],
       })
 })
 
