@@ -11,6 +11,7 @@ export interface Row {
   redirect?: '' | undefined
   title?: '' | undefined
   type?: '' | undefined
+  buttonRules?: string[]
 }
 
 export interface ThreeRouter extends Row {
@@ -35,6 +36,7 @@ export const permissionTree = (arr: ThreeRouter[], pid: string) => {
         redirect: current.redirect,
         affix: current.affix,
         type: current.type,
+        buttonRules: current.buttonRules,
       },
       title: current.title,
       id: current.id,

@@ -1,6 +1,13 @@
 <template>
   <div class="px-20px">
-    <div><el-button>新增角色</el-button></div>
+    <div class="py-10px flex justify-between">
+      <el-button>新增角色</el-button>
+
+      <div>
+        <el-button type="primary" @click="reUpdataRoles">设置</el-button>
+        <el-button type="success" @click="onReset">重置</el-button>
+      </div>
+    </div>
     <div class="flex">
       <div class="w-[20%]">
         <el-tree
@@ -13,6 +20,7 @@
           @node-click="handleNodeClick"
           node-key="id" />
         {{ info.rules }}
+        {{ info.buttonRules }}
       </div>
 
       <div class="w-full">
@@ -26,7 +34,7 @@
               </el-checkbox-group>
             </template>
           </el-table-column>
-          <el-table-column label="功能" align="center">
+          <el-table-column label="路由" align="center">
             <template #default="{ row }">
               <el-checkbox-group v-model="info.rules">
                 <el-checkbox
@@ -35,6 +43,21 @@
                   :label="group.id">
                   {{ group.title }}
                 </el-checkbox>
+              </el-checkbox-group>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="按钮" align="center">
+            <template #default="{ row }">
+              <el-checkbox-group v-model="info.buttonRules">
+                <div v-for="(group, index) in row.children" :key="index">
+                  <el-checkbox
+                    v-for="(targe, targeIndex) in group.meta.buttonRules"
+                    :key="targe"
+                    :label="targe">
+                    {{ targe }}
+                  </el-checkbox>
+                </div>
               </el-checkbox-group>
             </template>
           </el-table-column>
@@ -47,6 +70,8 @@
 <script setup lang="ts">
 import { routeStore } from '@/pinia/modules/route'
 
+import { user } from '@/pinia/modules/user'
+
 interface Tree {
   id: string
   label: string
@@ -54,7 +79,7 @@ interface Tree {
 }
 
 const storeRoute = routeStore()
-
+const storeUser = user()
 const props = {
   value: 'id',
   label: 'name',
@@ -67,7 +92,13 @@ const treeRef = ref(null) as any
 const info = ref({
   id: '',
   rules: [],
+  buttonRules: [],
 })
+
+const onReset = () => {
+  info.value.rules = []
+  info.value.buttonRules = []
+}
 
 const handleNodeClick = (targe: any) => {
   info.value = targe
@@ -75,7 +106,9 @@ const handleNodeClick = (targe: any) => {
 
 const initRole = async () => {
   try {
-    const { data } = await callApi.post('/userRole/roleList', { deptId: 0 })
+    const { data } = await callApi.post('/userRole/roleList', {
+      deptId: storeUser.deptId,
+    })
     threeData.value = data
     nextTick(() => {
       treeRef.value.setCurrentKey(data[0].id)
@@ -87,11 +120,15 @@ const initRole = async () => {
   }
 }
 
-const initRouter = async () => {
+const reUpdataRoles = async () => {
   try {
-    const { data } = await callApi.get('/routes/all')
-    console.log(data)
-    addRoutes.value = data
+    const { code, data } = await callApi.post('/userRole/updata', info.value)
+
+    console.log(code, data)
+
+    if (code == 200) {
+      initRole()
+    }
   } catch (error) {
     console.log(error)
   }
@@ -99,7 +136,6 @@ const initRouter = async () => {
 
 onMounted(() => {
   initRole()
-  // initRouter()
 })
 </script>
 
