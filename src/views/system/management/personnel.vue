@@ -19,8 +19,6 @@
           :default-expanded-keys="[1]"
           @node-click="handleNodeClick"
           node-key="id" />
-        {{ info.rules }}
-        {{ info.buttonRules }}
       </div>
 
       <div class="w-full">
