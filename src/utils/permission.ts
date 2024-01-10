@@ -2,11 +2,7 @@ import { Directive } from 'vue'
 import { user } from '@/pinia/modules/user'
 export const premission: Directive = {
   mounted(el, binding) {
-    console.log(el, binding)
-
     const storeUser = user()
-    // storeUser.roles.roleType
-    console.log(storeUser.roles.buttonRules)
 
     if (storeUser.roles.roleType == 'admin') return
 
