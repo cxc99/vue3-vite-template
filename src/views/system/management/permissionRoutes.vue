@@ -5,7 +5,7 @@
       <el-button type="primary" icon="Plus" @click="onAddModul('menu', '0')">
         新增模块
       </el-button>
-      <el-button type="primary" icon="Plus" @click="onPage">权限分发</el-button>
+      <!-- <el-button type="primary" icon="Plus" @click="onPage">权限分发</el-button>  -->
     </div>
     <el-table
       :data="routesList"
@@ -78,11 +78,12 @@
 import { useTable } from '@/hooks/useList'
 // import stortRoute from '@/store/modules/route'
 import { user } from '@/pinia/modules/user'
-import { ElMessageBox } from 'element-plus'
+import { ElMessageBox, ElMessage } from 'element-plus'
 import FormConfig from '@/components/FormConfig/index.vue'
 
-const router = useRouter()
+const route = useRoute()
 const useUser = user()
+console.log(route)
 
 const routesList = ref([])
 const operationType = ref('ADD')
@@ -236,22 +237,27 @@ async function onSubmit() {
     const url =
       operationType.value === 'ADD' ? '/routes/save' : '/routes/update'
     const { code } = await callApi.post(url, form.value)
-    if (code == 0) {
+    if (code == 200) {
+      ElMessage.success('操作成功')
       init()
+    } else {
+      ElMessage.error('操作失败')
     }
 
     dialogVisible.value = false
     resetFrom()
   } catch (error) {
     console.log(error)
+    ElMessage.error('操作失败')
   }
 }
 
 async function onDelete(id: number) {
   try {
     const { code, data } = await callApi.post('/routes/delete', { id })
-    if (code == 0) {
+    if (code == 200) {
       init()
+      ElMessage.success('删除成功')
     }
   } catch (error) {
     console.log(error)

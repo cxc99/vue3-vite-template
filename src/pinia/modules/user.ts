@@ -15,7 +15,7 @@ interface User {
   userId: string
   userName: string
   userType: string
-  roles: Record<string, any>
+  roles: any
 }
 
 export const user = defineStore('user', {

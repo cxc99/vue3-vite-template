@@ -1,7 +1,7 @@
 <template>
   <div class="px-20px">
     <div class="py-10px flex justify-between">
-      <el-button>新增角色</el-button>
+      <el-button  v-premission="'admin'">新增角色</el-button>
 
       <div>
         <el-button type="primary" @click="reUpdataRoles">设置</el-button>
@@ -49,8 +49,13 @@
 
           <el-table-column label="按钮" align="center">
             <template #default="{ row }">
-              <el-checkbox-group v-model="info.buttonRules">
-                <div v-for="(group, index) in row.children" :key="index">
+              <el-checkbox-group
+                v-model="info.buttonRules"
+                class="flex justify-center">
+                <div
+                  v-for="(group, index) in row.children"
+                  :key="index"
+                  class="pr-5px">
                   <el-checkbox
                     v-for="(targe, targeIndex) in group.meta.buttonRules"
                     :key="targe"
@@ -68,6 +73,7 @@
 </template>
 
 <script setup lang="ts">
+import { ElMessage } from 'element-plus'
 import { routeStore } from '@/pinia/modules/route'
 
 import { user } from '@/pinia/modules/user'
@@ -128,6 +134,7 @@ const reUpdataRoles = async () => {
 
     if (code == 200) {
       initRole()
+      ElMessage.success('更新成功')
     }
   } catch (error) {
     console.log(error)
