@@ -1,7 +1,7 @@
 <template>
   <div class="px-20px">
     <div class="py-10px flex justify-between">
-      <el-button  v-premission="'admin'">新增角色</el-button>
+      <el-button v-premission="['admin']">新增角色</el-button>
 
       <div>
         <el-button type="primary" @click="reUpdataRoles">设置</el-button>
@@ -60,7 +60,7 @@
                     v-for="(targe, targeIndex) in group.meta.buttonRules"
                     :key="targe"
                     :label="targe">
-                    {{ targe }}
+                    {{ group.title }} : {{ targe }}
                   </el-checkbox>
                 </div>
               </el-checkbox-group>
