@@ -96,6 +96,7 @@ const onSubmit = async () => {
         loginDate: data.loginDate,
         avatar: data.avatar,
         phonenumber: data.phonenumber,
+        roles: data.roles,
       }
 
       storeUser.SET_USER(infoData)

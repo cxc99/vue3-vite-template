@@ -11,10 +11,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 // import qs from 'qs'
 
-const baseURL =
-  process.env.NODE_ENV === 'development'
-    ? `${window.location.origin}/api/`
-    : 'http://47.97.154.67/api/' // 正式地址
+const baseURL = `${window.location.origin}/api/`
 
 const instance = axios.create({
   baseURL,
