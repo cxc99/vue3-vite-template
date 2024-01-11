@@ -8,13 +8,12 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'element-plus/dist/index.css'
 
 import { premission } from '@/utils/permission'
-
+import { ElLoading } from 'element-plus'
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-
-
+app.directive('loading', ElLoading.directive) //【新增】
 app.directive('premission', premission)
 
 app.use(router).use(pinia).mount('#app')

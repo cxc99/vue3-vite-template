@@ -258,19 +258,6 @@ defineExpose({
 </script>
 
 <style scoped lang="scss">
-.uploade {
-  // border: 1px dashed var(--el-border-color);
-  // border-radius: 6px;
-  // cursor: pointer;
-  // position: relative;
-  // overflow: hidden;
-  // transition: var(--el-transition-duration-fast);
-  // width: 125px;
-  // height: 125px;
-  // &:hover {
-  //   border-color: var(--el-color-primary);
-  // }
-}
 .el-icon.avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;

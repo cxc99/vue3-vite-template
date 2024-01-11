@@ -111,7 +111,11 @@ export function get(url: string, params = {}) {
           }, 1000)
           return
         } else if (res.data.code !== 200) {
-          console.log(res.msg)
+          ElMessage({
+            message: res.data.msg || '服务器错误',
+            type: 'error',
+            duration: 2 * 1000,
+          })
         }
         resolve(res.data)
       })
@@ -144,6 +148,14 @@ export function post(url: string, params: Record<string, any> = {}) {
       .post(url, params)
       .then(res => {
         resolve(res.data)
+
+        if (res.data.code !== 200) {
+          ElMessage({
+            message: res.data.msg || '服务器错误',
+            type: 'error',
+            duration: 2 * 1000,
+          })
+        }
       })
       .catch(error => {
         console.log('网络请求错误')

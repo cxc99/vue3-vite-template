@@ -17,7 +17,7 @@
           highlight-current
           default-expand-all
           :default-expanded-keys="[1]"
-          @node-click="handleNodeClick"
+          @current-change="handleNodeClick"
           node-key="id" />
       </div>
 
@@ -116,7 +116,6 @@ const initRole = async () => {
     threeData.value = data
     nextTick(() => {
       treeRef.value.setCurrentKey(data[0].id)
-
       info.value = data[0]
     })
   } catch (error) {
@@ -128,12 +127,7 @@ const reUpdataRoles = async () => {
   try {
     const { code, data } = await callApi.post('/userRole/updata', info.value)
 
-    console.log(code, data)
-
-    if (code == 200) {
-      initRole()
-      ElMessage.success('更新成功')
-    }
+    code == 200 && ElMessage.success('更新成功')
   } catch (error) {
     console.log(error)
   }
@@ -144,4 +138,8 @@ onMounted(() => {
 })
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+::v-deep(.el-tree-node__content) {
+  height: 38px;
+}
+</style>
