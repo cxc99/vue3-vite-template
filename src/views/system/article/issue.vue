@@ -48,6 +48,8 @@ const form = ref({
   userName: useUser.nickName,
   id: null as string | null,
   imgList: [] as any,
+  subhead: '',
+  tag: 'javaSrcipt',
 })
 
 const formItem = ref([
@@ -57,7 +59,31 @@ const formItem = ref([
     type: 'input',
     required: true,
     placeholder: '',
-    span: 12,
+    span: 8,
+  },
+  {
+    label: '标签',
+    key: 'tag',
+    type: 'select',
+    required: true,
+    placeholder: '',
+    options: [
+      { type: 'javaSrcipt', name: 'javaSrcipt' },
+      { type: 'css', name: 'css' },
+      { type: 'nest', name: 'nest' },
+      { type: 'vue', name: 'vue' },
+      { type: 'react', name: 'react' },
+      { type: '其他', name: '其他' },
+    ],
+    span: 8,
+  },
+  {
+    label: '简述',
+    key: 'subhead',
+    type: 'textarea',
+    required: true,
+    placeholder: '',
+    span: 17,
   },
   {
     label: '标题图片',
@@ -148,6 +174,8 @@ onActivated(() => {
         userName: useUser.nickName,
         id: null,
         imgList: [],
+        subhead: '',
+        tag: 'javaSrcipt',
       })
 })
 

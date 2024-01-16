@@ -10,7 +10,7 @@
           <el-form-item
             :label="item.label + ':'"
             :prop="item.key"
-            label-width="150">
+            :label-width="item.labelWidth || 150">
             <div v-if="item.type === 'input'" class="w-full flex">
               <el-input v-model="form[item.key]" :disabled="item.disabled" />
               <span class="text-center">
@@ -132,6 +132,17 @@
                   </div>
                 </el-popover>
               </div>
+            </div>
+
+            <div v-if="item.type === 'textarea'" class="w-full flex">
+              <el-input
+                v-model="form[item.key]"
+                type="textarea"
+                :rows="2"
+                :disabled="item.disabled" />
+              <span class="text-center">
+                {{ item.unit || '' }}
+              </span>
             </div>
           </el-form-item>
         </el-col>

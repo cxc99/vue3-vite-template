@@ -12,7 +12,9 @@
             <div v-for="(item, index) in Menu" :key="index">
               <el-sub-menu v-if="item.children?.length" :index="item.path">
                 <template #title>
-                  <el-icon><location /></el-icon>
+                  <el-icon v-if="item.meta.icon">
+                    <Component :is="item.meta.icon"></Component>
+                  </el-icon>
                   <span>{{ item.title }}</span>
                 </template>
 
@@ -21,6 +23,9 @@
                     v-if="group.children?.length"
                     :index="group.path">
                     <template #title>
+                      <el-icon v-if="group.meta.icon">
+                        <Component :is="group.meta.icon"></Component>
+                      </el-icon>
                       <span>{{ group.title }}</span>
                     </template>
                     <el-menu-item
@@ -36,6 +41,9 @@
                       :route="group.path"
                       :index="group.path">
                       <template #title>
+                        <el-icon v-if="group.meta.icon">
+                          <Component :is="group.meta.icon"></Component>
+                        </el-icon>
                         {{ group.title }}
                       </template>
                     </el-menu-item>
@@ -44,7 +52,9 @@
               </el-sub-menu>
 
               <el-menu-item v-else :key="index" :index="item.path">
-                <el-icon><icon-menu /></el-icon>
+                <el-icon v-if="item.meta.icon">
+                  <Component :is="item.meta.icon"></Component>
+                </el-icon>
                 <span>{{ item.title }}</span>
               </el-menu-item>
             </div>

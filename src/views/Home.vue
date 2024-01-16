@@ -19,15 +19,15 @@ function onPage(url = '/') {
 
 onMounted(() => {
   //@ts-ignore
-  VANTA.CELLS({
-    el: home.value,
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.0,
-    minWidth: 200.0,
-    scale: 1.0,
-  })
+  // VANTA.CLOUDS({
+  //   el: home.value,
+  //   mouseControls: true,
+  //   touchControls: true,
+  //   gyroControls: false,
+  //   minHeight: 200.0,
+  //   minWidth: 200.0,
+  //   scale: 1.0,
+  // })
 })
 </script>
 
