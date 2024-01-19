@@ -168,7 +168,7 @@ const onSubmit = async () => {
         setUserInfo(data)
 
         return nextTick(() => {
-          window.open(url, '_blank')
+          window.location.replace(url)
         })
         // setTimeout(() => {
         //   const Blogs = window.open(url, '_blank')
