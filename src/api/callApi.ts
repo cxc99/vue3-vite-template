@@ -160,6 +160,11 @@ export function post(url: string, params: Record<string, any> = {}) {
       .catch(error => {
         console.log('网络请求错误')
         reject(error)
+        ElMessage({
+          message: '服务器错误',
+          type: 'error',
+          duration: 2 * 1000,
+        })
       })
   })
 }

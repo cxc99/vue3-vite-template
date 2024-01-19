@@ -163,7 +163,7 @@ const onSubmit = async () => {
 
 const initRole = async () => {
   try {
-    const { data } = await callApi.post('/userRole/roleList', {
+    const { data } = await callApi.post('/role/roleList', {
       deptId: storeUser.deptId,
     })
     threeData.value = data

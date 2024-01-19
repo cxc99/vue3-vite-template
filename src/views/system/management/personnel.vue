@@ -82,7 +82,7 @@ const handleNodeClick = (targe: any) => {
 
 const reUpdataRoles = async () => {
   try {
-    const { code, data } = await callApi.post('/userRole/updata', info.value)
+    const { code, data } = await callApi.post('/role/updata', info.value)
 
     code == 200 && ElMessage.success('更新成功')
   } catch (error) {
