@@ -131,8 +131,8 @@ import { routeStore } from '@/pinia/modules/route'
 
 const url =
   process.env.NODE_ENV === 'development'
-    ? 'http://192.168.1.15:2222/'
-    : 'http://chenxiancheng.top/'
+    ? 'http://192.168.1.15:2222'
+    : 'http://chenxiancheng.top'
 
 const router = useRouter()
 const route = useRoute()
@@ -168,7 +168,7 @@ const onSubmit = async () => {
         setUserInfo(data)
 
         return nextTick(() => {
-          window.location.replace(url)
+          window.location.replace(url + route.query.path)
         })
         // setTimeout(() => {
         //   const Blogs = window.open(url, '_blank')
