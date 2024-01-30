@@ -15,8 +15,8 @@
               <!-- 包含标题和切换注册表单的链接的容器 -->
               <div class="heading">
                 <h2>欢迎回来</h2>
-                <h6>Not registered yet?</h6>
-                <span @click="isLogin = false">Sign up</span>
+                <h6>没有账号?</h6>
+                <span @click="isLogin = false">去注册</span>
               </div>
               <!-- 包含输入字段和提交按钮的容器 -->
               <div class="actual-form">
@@ -58,7 +58,7 @@
               <div class="heading">
                 <h2>注册</h2>
                 <h6>Already have an account?</h6>
-                <span @click="isLogin = true">Sign In</span>
+                <span @click="isLogin = true">去登陆</span>
               </div>
               <!-- 包含输入字段和提交按钮的容器 -->
               <div class="actual-form">
