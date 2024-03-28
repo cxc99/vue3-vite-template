@@ -6,6 +6,13 @@
         class="w-100px h-40px mr-20px"
         @click="onPage('/loign')"></c-button>
     </div>
+
+    <div class="w-500px h-500px bg-red-200 relative">
+      <div v-draggable class="w-full h-100px bg-blue-300">轮播图</div>
+      <div class="button-group" v-draggable>
+        <c-button lable="按钮" class="w-100px h-40px"></c-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,10 +39,16 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.button-group {
+  // position: absolute;
+  // left: 50%;
+  // bottom: 10%;
+  // transform: translate(-50%, -50%);
+}
 .home {
   width: 100vw;
   height: 100vh;
-  display: grid;
-  place-items: center;
+  // display: grid;
+  // place-items: center;
 }
 </style>
