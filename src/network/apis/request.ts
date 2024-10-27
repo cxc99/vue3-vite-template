@@ -5,7 +5,6 @@
 
 const router = useRouter()
 import axios from 'axios'
-import qs from 'qs'
 
 const baseURL =
   process.env.NODE_ENV === 'development'

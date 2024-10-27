@@ -1,6 +1,5 @@
 import { createPinia, defineStore } from 'pinia'
 import { user } from './modules/user'
-// import { useSystemStore } from './modules/system'
 
 export const pinia = createPinia()
 export { user }
